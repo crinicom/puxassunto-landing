@@ -1,0 +1,31 @@
+name: puxassunto-landing
+region: nyc3
+static_sites:
+  - name: puxassunto-web
+    build_command: npm install && npm run build
+    environment_slug: node-js
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: TU_USUARIO/puxassunto-landing # Reemplaza con tu repositorio
+    output_dir: dist
+    catchall_document: index.html
+    routes:
+      - path: /
+    headers:
+      # Caché para los assets generados por Vite
+      - path: /assets/
+        name: Cache-Control
+        value: "public, max-age=31536000, immutable"
+      # Caché para la carpeta /arte (solicitado en el prompt)
+      - path: /arte/
+        name: Cache-Control
+        value: "public, max-age=31536000, immutable"
+      # Caché para la carpeta /mini_game donde guardamos las tarjetas
+      - path: /mini_game/
+        name: Cache-Control
+        value: "public, max-age=31536000, immutable"
+      # Caché para /mini_juego por si quedó algún asset mapeado
+      - path: /mini_juego/
+        name: Cache-Control
+        value: "public, max-age=31536000, immutable"

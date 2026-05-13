@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-puxaCream: #fdfaf0;
+  --color-puxaText: #004282;
+  --color-puxaGold: #f39c12;
+  --color-puxaBlue: #1e90ff;
+  --color-puxaPurple: #9b59b6;
+  --color-puxaGreen: #00b894;
+}
+
+@layer base {
+  html, body {
+    @apply bg-puxaCream text-puxaText m-0 p-0 antialiased;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Updated utilities for the "Como funciona" steps to match the light theme */
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 border border-black/5 backdrop-blur-md rounded-2xl shadow-lg;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}

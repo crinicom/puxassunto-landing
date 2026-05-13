@@ -52,7 +52,7 @@ export default function MiniGame() {
 
   // Auto-reset after 10 seconds when flipped
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     if (isFlipped) {
       timeoutId = setTimeout(() => {
         handleReset();

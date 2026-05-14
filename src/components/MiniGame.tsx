@@ -58,28 +58,21 @@ export default function MiniGame() {
     }, 300);
   }, [changeCardRandomly]);
 
-  // Timers: 10s auto-flip back, and idle rotation when in DORSO
+  // Timers: 10s auto-flip back
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
-    let intervalId: ReturnType<typeof setInterval>;
 
     if (isFlipped) {
       // If user is looking at the question, wait 10s then flip back
       timeoutId = setTimeout(() => {
         handleReset();
       }, 10000);
-    } else {
-      // If in DORSO state, rotate the card randomly every 4 seconds with a fade
-      intervalId = setInterval(() => {
-        changeCardRandomly();
-      }, 4000);
     }
 
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
-      if (intervalId) clearInterval(intervalId);
     };
-  }, [isFlipped, handleReset, changeCardRandomly]);
+  }, [isFlipped, handleReset]);
 
   const handleCardClick = () => {
     if (isFlipped) {

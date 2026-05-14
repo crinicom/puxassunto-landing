@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useJogarUrl } from '../hooks/useJogarUrl';
 
 const categories = [
   {
@@ -36,6 +37,7 @@ export default function MiniGame() {
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [frontIndex, setFrontIndex] = useState(0);
   const [showCTA, setShowCTA] = useState(false);
+  const jogarUrl = useJogarUrl();
 
   // Initialize randomly on mount
   useEffect(() => {
@@ -95,7 +97,7 @@ export default function MiniGame() {
         role="button"
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
-        aria-label={isFlipped ? "Clique para virar outra carta" : `Carta da categoria ${currentCategory.name}. Clique para virar.`}
+        aria-label={isFlipped ? "Clique para virar otra carta" : `Carta da categoria ${currentCategory.name}. Clique para virar.`}
       >
         <motion.div
           className="w-full h-full relative preserve-3d"
@@ -147,12 +149,15 @@ export default function MiniGame() {
             transition={{ duration: 0.4 }}
             className="flex flex-col items-center gap-4 w-full"
           >
-            <button 
-              className="w-full sm:w-auto px-8 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300"
-              onClick={(e) => { e.stopPropagation(); document.getElementById('cta-footer')?.scrollIntoView({ behavior: 'smooth' }); }}
+            <a 
+              href={jogarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-8 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
             >
               Quero jogar!
-            </button>
+            </a>
           </motion.div>
         ) : (
           <motion.div

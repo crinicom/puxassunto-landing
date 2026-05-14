@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import MiniGame from './components/MiniGame';
 import HowItWorks from './components/HowItWorks';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useJogarUrl } from './hooks/useJogarUrl';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const jogarUrl = useJogarUrl();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,12 +37,14 @@ function App() {
               <div className="font-bold text-xl tracking-widest text-puxaText">
                 PUXA<span className="text-puxaGold">SSUNTO</span>
               </div>
-              <button 
-                onClick={() => document.getElementById('cta-footer')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-6 py-2 bg-puxaGold text-white text-sm uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(243,156,18,0.4)] transition-all duration-300"
+              <a 
+                href={jogarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 bg-puxaGold text-white text-sm uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center"
               >
                 Quero jogar!
-              </button>
+              </a>
             </div>
           </motion.header>
         )}
@@ -63,7 +67,7 @@ function App() {
               PUXA <span className="text-transparent bg-clip-text bg-gradient-to-r from-puxaBlue via-puxaPurple to-puxaGold">ASSUNTO</span>
             </h1>
             <p className="text-lg md:text-2xl text-puxaText/80 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-              100 perguntas para puxar conversa. Ideal para amigos, família e qualquer momento!
+              100 perguntas para puxar conversa. Ideal para amigos, familia y cualquier momento!
             </p>
           </motion.div>
 
@@ -73,12 +77,14 @@ function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-20"
           >
-            <button 
-              onClick={() => document.getElementById('cta-footer')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4 text-lg bg-puxaGold text-white uppercase font-black tracking-widest rounded-full hover:bg-yellow-500 hover:scale-105 shadow-[0_4px_15px_rgba(243,156,18,0.3)] hover:shadow-[0_8px_25px_rgba(243,156,18,0.5)] transition-all duration-300"
+            <a 
+              href={jogarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-10 py-4 text-lg bg-puxaGold text-white uppercase font-black tracking-widest rounded-full hover:bg-yellow-500 hover:scale-105 shadow-[0_4px_15px_rgba(243,156,18,0.3)] hover:shadow-[0_8px_25px_rgba(243,156,18,0.5)] transition-all duration-300"
             >
               Quero jogar!
-            </button>
+            </a>
           </motion.div>
 
           <motion.div
@@ -107,9 +113,14 @@ function App() {
           <p className="text-xl text-puxaText/80 mb-12 font-medium">
             Perfeito para reuniões, viagens e encontros. Para todas as idades, sem tempo limite e sem respostas certas.
           </p>
-          <button className="px-12 py-5 sm:h-16 text-xl bg-puxaGold text-white uppercase font-black tracking-widest rounded-full shadow-[0_4px_20px_rgba(243,156,18,0.4)] hover:shadow-[0_8px_30px_rgba(243,156,18,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto">
+          <a 
+            href={jogarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-12 py-5 sm:h-16 text-xl bg-puxaGold text-white uppercase font-black tracking-widest rounded-full shadow-[0_4px_20px_rgba(243,156,18,0.4)] hover:shadow-[0_8px_30px_rgba(243,156,18,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+          >
             Quero jogar!
-          </button>
+          </a>
         </div>
       </section>
       

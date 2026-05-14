@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = [
   {
@@ -29,6 +29,7 @@ const categories = [
 ];
 
 const getRandomCategory = () => categories[Math.floor(Math.random() * categories.length)];
+const getRandomFrontIndex = () => Math.floor(Math.random() * 4);
 
 export default function MiniGame() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -39,35 +40,51 @@ export default function MiniGame() {
   // Initialize randomly on mount
   useEffect(() => {
     setCurrentCategory(getRandomCategory());
+    setFrontIndex(getRandomFrontIndex());
+  }, []);
+
+  const changeCardRandomly = useCallback(() => {
+    setCurrentCategory(getRandomCategory());
+    setFrontIndex(getRandomFrontIndex());
   }, []);
 
   const handleReset = useCallback(() => {
     setIsFlipped(false);
     setShowCTA(false);
     
+    // Change category after the unflip animation completes to avoid visual bugs
     setTimeout(() => {
-      setCurrentCategory(getRandomCategory());
-    }, 300); // Wait for the unflip animation before swapping category
-  }, []);
+      changeCardRandomly();
+    }, 300);
+  }, [changeCardRandomly]);
 
-  // Auto-reset after 10 seconds when flipped
+  // Timers: 10s auto-flip back, and idle rotation when in DORSO
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
+    let intervalId: ReturnType<typeof setInterval>;
+
     if (isFlipped) {
+      // If user is looking at the question, wait 10s then flip back
       timeoutId = setTimeout(() => {
         handleReset();
       }, 10000);
+    } else {
+      // If in DORSO state, rotate the card randomly every 4 seconds with a fade
+      intervalId = setInterval(() => {
+        changeCardRandomly();
+      }, 4000);
     }
+
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
+      if (intervalId) clearInterval(intervalId);
     };
-  }, [isFlipped, handleReset]);
+  }, [isFlipped, handleReset, changeCardRandomly]);
 
   const handleCardClick = () => {
     if (isFlipped) {
       handleReset();
     } else {
-      setFrontIndex(Math.floor(Math.random() * 4));
       setIsFlipped(true);
       
       // Show CTA button after flip animation completes
@@ -96,19 +113,26 @@ export default function MiniGame() {
         >
           {/* Front of card (Dorso in this context before flip) */}
           <div 
-            className="absolute inset-0 w-full h-full backface-hidden rounded-[2rem] shadow-xl overflow-hidden border border-black/10"
+            className="absolute inset-0 w-full h-full backface-hidden rounded-[2rem] shadow-xl overflow-hidden border border-black/10 bg-puxaCream"
           >
-            <img 
-              src={currentCategory.dorso} 
-              alt={`Dorso da carta ${currentCategory.name}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img 
+                key={`${currentCategory.id}-dorso-${frontIndex}`}
+                src={currentCategory.dorso} 
+                alt={`Dorso da carta ${currentCategory.name}`}
+                className="w-full h-full object-cover absolute inset-0"
+                loading="lazy"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8 }}
+              />
+            </AnimatePresence>
           </div>
 
           {/* Back of card (Frente - question revealed) */}
           <div 
-            className="absolute inset-0 w-full h-full backface-hidden rounded-[2rem] shadow-2xl overflow-hidden border border-puxaGold/30"
+            className="absolute inset-0 w-full h-full backface-hidden rounded-[2rem] shadow-2xl overflow-hidden border border-puxaGold/30 bg-puxaCream"
             style={{ transform: 'rotateY(180deg)' }}
           >
             <img 
@@ -132,7 +156,7 @@ export default function MiniGame() {
           >
             <button 
               className="w-full sm:w-auto px-8 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300"
-              onClick={() => document.getElementById('cta-footer')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={(e) => { e.stopPropagation(); document.getElementById('cta-footer')?.scrollIntoView({ behavior: 'smooth' }); }}
             >
               Quero jogar!
             </button>

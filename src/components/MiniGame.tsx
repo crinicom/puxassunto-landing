@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useJogarUrl } from '../hooks/useJogarUrl';
+import { useUrls } from '../hooks/useUrls';
 
 const categories = [
   {
@@ -37,7 +37,7 @@ export default function MiniGame() {
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [frontIndex, setFrontIndex] = useState(0);
   const [showCTA, setShowCTA] = useState(false);
-  const jogarUrl = useJogarUrl();
+  const { jogarUrl, jugarUrl } = useUrls();
 
   // Initialize randomly on mount
   useEffect(() => {
@@ -149,15 +149,28 @@ export default function MiniGame() {
             transition={{ duration: 0.4 }}
             className="flex flex-col items-center gap-4 w-full"
           >
-            <a 
-              href={jogarUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Quero jogar!
-            </a>
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+              <a 
+                href={jogarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img src="https://flagcdn.com/br.svg" alt="Brasil" className="w-5 h-5 rounded-full object-cover border border-white/20" />
+                Quero jogar!
+              </a>
+              <a 
+                href={jugarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3 h-12 bg-puxaGold text-white uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_4px_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img src="https://flagcdn.com/ar.svg" alt="Argentina" className="w-5 h-5 rounded-full object-cover border border-white/20" />
+                Quiero jugar!
+              </a>
+            </div>
           </motion.div>
         ) : (
           <motion.div

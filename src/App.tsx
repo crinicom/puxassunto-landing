@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import MiniGame from './components/MiniGame';
 import HowItWorks from './components/HowItWorks';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useJogarUrl } from './hooks/useJogarUrl';
+import { useUrls } from './hooks/useUrls';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
-  const jogarUrl = useJogarUrl();
+  const { jogarUrl, jugarUrl } = useUrls();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,14 +37,28 @@ function App() {
               <div className="font-bold text-xl tracking-widest text-puxaText">
                 PUXA<span className="text-puxaGold">SSUNTO</span>
               </div>
-              <a 
-                href={jogarUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 bg-puxaGold text-white text-sm uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center"
-              >
-                Quero jogar!
-              </a>
+              <div className="flex items-center gap-2">
+                <a 
+                  href={jogarUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-puxaGold text-white text-xs sm:text-sm uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center gap-2"
+                >
+                  <img src="https://flagcdn.com/br.svg" alt="Brasil" className="w-4 h-4 rounded-full object-cover border border-white/20" />
+                  <span className="hidden sm:inline">Quero jogar!</span>
+                  <span className="sm:hidden">PT</span>
+                </a>
+                <a 
+                  href={jugarUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-puxaGold text-white text-xs sm:text-sm uppercase font-bold tracking-wider rounded-full hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(243,156,18,0.4)] transition-all duration-300 flex items-center gap-2"
+                >
+                  <img src="https://flagcdn.com/ar.svg" alt="Argentina" className="w-4 h-4 rounded-full object-cover border border-white/20" />
+                  <span className="hidden sm:inline">Quiero jugar!</span>
+                  <span className="sm:hidden">ES</span>
+                </a>
+              </div>
             </div>
           </motion.header>
         )}
@@ -77,14 +91,26 @@ function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-20"
           >
-            <a 
-              href={jogarUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-10 py-4 text-lg bg-puxaGold text-white uppercase font-black tracking-widest rounded-full hover:bg-yellow-500 hover:scale-105 shadow-[0_4px_15px_rgba(243,156,18,0.3)] hover:shadow-[0_8px_25px_rgba(243,156,18,0.5)] transition-all duration-300"
-            >
-              Quero jogar!
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a 
+                href={jogarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-lg bg-puxaGold text-white uppercase font-black tracking-widest rounded-full hover:bg-yellow-500 hover:scale-105 shadow-[0_4px_15px_rgba(243,156,18,0.3)] hover:shadow-[0_8px_25px_rgba(243,156,18,0.5)] transition-all duration-300 w-full sm:w-auto"
+              >
+                <img src="https://flagcdn.com/br.svg" alt="Brasil" className="w-6 h-6 rounded-full object-cover border border-white/20" />
+                Quero jogar!
+              </a>
+              <a 
+                href={jugarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-lg bg-puxaGold text-white uppercase font-black tracking-widest rounded-full hover:bg-yellow-500 hover:scale-105 shadow-[0_4px_15px_rgba(243,156,18,0.3)] hover:shadow-[0_8px_25px_rgba(243,156,18,0.5)] transition-all duration-300 w-full sm:w-auto"
+              >
+                <img src="https://flagcdn.com/ar.svg" alt="Argentina" className="w-6 h-6 rounded-full object-cover border border-white/20" />
+                Quiero jugar!
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
@@ -113,14 +139,26 @@ function App() {
           <p className="text-xl text-puxaText/80 mb-12 font-medium">
             Perfeito para reuniões, viagens e encontros. Para todas as idades, sem tempo limite e sem respostas certas.
           </p>
-          <a 
-            href={jogarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-12 py-5 sm:h-16 text-xl bg-puxaGold text-white uppercase font-black tracking-widest rounded-full shadow-[0_4px_20px_rgba(243,156,18,0.4)] hover:shadow-[0_8px_30px_rgba(243,156,18,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto"
-          >
-            Quero jogar!
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+            <a 
+              href={jogarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-5 sm:h-16 text-lg sm:text-xl bg-puxaGold text-white uppercase font-black tracking-widest rounded-full shadow-[0_4px_20px_rgba(243,156,18,0.4)] hover:shadow-[0_8px_30px_rgba(243,156,18,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+            >
+              <img src="https://flagcdn.com/br.svg" alt="Brasil" className="w-7 h-7 rounded-full object-cover border border-white/20" />
+              Quero jogar!
+            </a>
+            <a 
+              href={jugarUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-5 sm:h-16 text-lg sm:text-xl bg-puxaGold text-white uppercase font-black tracking-widest rounded-full shadow-[0_4px_20px_rgba(243,156,18,0.4)] hover:shadow-[0_8px_30px_rgba(243,156,18,0.6)] hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+            >
+              <img src="https://flagcdn.com/ar.svg" alt="Argentina" className="w-7 h-7 rounded-full object-cover border border-white/20" />
+              Quiero jugar!
+            </a>
+          </div>
         </div>
       </section>
       

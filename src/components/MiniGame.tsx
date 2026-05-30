@@ -97,7 +97,7 @@ export default function MiniGame() {
         role="button"
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
-        aria-label={isFlipped ? "Clique para virar otra carta" : `Carta da categoria ${currentCategory.name}. Clique para virar.`}
+        aria-label={isFlipped ? "Clique para virar outra carta" : `Carta da categoria ${currentCategory.name}. Clique para virar.`}
       >
         <motion.div
           className="w-full h-full relative preserve-3d"

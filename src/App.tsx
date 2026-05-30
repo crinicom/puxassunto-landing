@@ -81,7 +81,7 @@ function App() {
               PUXA <span className="text-transparent bg-clip-text bg-gradient-to-r from-puxaBlue via-puxaPurple to-puxaGold">ASSUNTO</span>
             </h1>
             <p className="text-lg md:text-2xl text-puxaText/80 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-              100 perguntas para puxar conversa. Ideal para amigos, familia y cualquier momento!
+              100 perguntas para puxar conversa. Ideal para amigos, família e qualquer momento!
             </p>
           </motion.div>
 

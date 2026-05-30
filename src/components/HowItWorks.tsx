@@ -8,7 +8,7 @@ const steps = [
   },
   {
     title: "Escolha sua vibe",
-    description: "O deck tem 4 categorias (Quebrando o gelo, Exibição, Ponto de vista e Imersão). Escolha uma ou misture todas!",
+    description: "O deck tem 4 categorias (Rompendo o Gelo, Exibição, Ponto de Vista e Imersão). Escolha uma ou misture todas!",
     icon: <LayoutGrid className="w-8 h-8 text-white" />
   },
   {
